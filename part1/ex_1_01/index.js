@@ -1,7 +1,11 @@
-const getHashNow = () => {
-  const randomHash = Math.random().toString(36).substr(2, 6)
+import crypto from 'crypto'
 
-  console.log(randomHash)
+const randomUUID = crypto.randomUUID()
+
+const getHashNow = () => {
+  const timeStamp = new Date().toISOString()
+
+  console.log(`${timeStamp}: ${randomUUID}`)
 
   setTimeout(getHashNow, 5000)
 }
