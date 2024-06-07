@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: uuidgenerator
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: uuidgenerator
+  template:
+    metadata:
+      labels:
+        app: uuidgenerator
+    spec:
+      containers:
+        - name: uuidgenerator
+          image: hremonen/uuidgenerator:1.01
