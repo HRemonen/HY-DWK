@@ -32,3 +32,4 @@ Server started in port 8000
 ```
 
 As we can see the port is defined in the [deployment](./manifests/deployment.yaml) as the containers env variable. Locally .env file is used to define the port.
+If that shit wouldn't work it should of been 3000.
