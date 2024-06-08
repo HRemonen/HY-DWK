@@ -1,3 +1,11 @@
+# Log output exercises
+
+## EX 1.03
+
+I already did make the deployment file in the ex 1.01 so this is done already.
+
+## Ex 1.01 
+
 Build the image and push to docker hub
 
 ```bash 

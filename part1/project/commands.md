@@ -1,4 +1,4 @@
-# Project excercises
+# Project exercises
 
 ## EX 1.04
 
