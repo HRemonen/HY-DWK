@@ -1,5 +1,39 @@
 # Project exercises
 
+## EX 1.05
+
+Created simple static html template with Pug that is served on requests on the route '/'.
+
+- Updated the deployment.yaml to use the image dwkproject:1.05
+- Built the new image hremonen/dwkproject:1.05
+- Pushed hremonen/dwkproject:1.05 to Docker hub
+- Applied the new deployment
+    ```bash
+    kubectl apply -f manifest/deployment.yaml
+
+    deployment.apps/dwkproject-dep updated
+    ```
+- Check the new pod
+    ```bash
+    project % kubectl get pods                                              
+    NAME                                READY   STATUS    RESTARTS   AGE
+    logoutput-dep-6fc56d45b5-tdkt2      1/1     Running   0          76m
+    hashresponse-dep-768d7cbbf8-tgr4l   1/1     Running   0          33m
+    dwkproject-dep-64f5c6bf94-xmrq4     1/1     Running   0          51s
+    ```
+- Forwarded the pods port 8080 to local port 3000
+    ```bash
+    kubectl port-forward dwkproject-dep-64f5c6bf94-xmrq4 3000:8080
+    Forwarding from 127.0.0.1:3000 -> 8080
+    Forwarding from [::1]:3000 -> 8080
+    ```
+- Checked that the html is available on localhost:3000
+    ```bash
+    curl localhost:3000
+
+    <html><head><title>DWK project</title></head><body><h1>Hello world!</h1></body></html>
+    ```
+
 ## EX 1.04
 
 I already did make the deployment file in the ex 1.01 so this is done already. However this is what I did:

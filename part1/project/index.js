@@ -4,12 +4,15 @@ import express from 'express'
 dotenv.config()
 
 const app = express()
-const port = process.env.PORT || 3000
+const PORT = process.env.PORT || 3000
+
+app.set('views', './views')
+app.set('view engine', 'pug')
 
 app.get('/', (req, res) => {
-  res.send('ping')
+  res.render('index', { title: 'DWK project', message: 'Hello world!' })
 })
 
-app.listen(port, () => {
-  console.log(`Server started in port ${port}`)
+app.listen(PORT, () => {
+  console.log(`Server started in port ${PORT}`)
 })

@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: dwkproject
-          image: hremonen/dwkproject:1.04
+          image: hremonen/dwkproject:1.05
           env:
            - name: PORT
              value: "8080"
