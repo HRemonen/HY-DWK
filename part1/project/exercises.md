@@ -5,15 +5,15 @@
 Created [service.yaml](./manifests/service.yaml) file for getting access to the project.
 
 - Deleted the old cluster
-```bash
-project % k3d cluster delete            
-INFO[0000] Deleting cluster 'k3s-default'               
-INFO[0003] Deleting cluster network 'k3d-k3s-default'   
-INFO[0003] Deleting 1 attached volumes...               
-INFO[0003] Removing cluster details from default kubeconfig... 
-INFO[0003] Removing standalone kubeconfig file (if there is one)... 
-INFO[0003] Successfully deleted cluster k3s-default!
-```
+    ```bash
+    project % k3d cluster delete            
+    INFO[0000] Deleting cluster 'k3s-default'               
+    INFO[0003] Deleting cluster network 'k3d-k3s-default'   
+    INFO[0003] Deleting 1 attached volumes...               
+    INFO[0003] Removing cluster details from default kubeconfig... 
+    INFO[0003] Removing standalone kubeconfig file (if there is one)... 
+    INFO[0003] Successfully deleted cluster k3s-default!
+    ```
 
 - Create the new cluster
     ```bash
