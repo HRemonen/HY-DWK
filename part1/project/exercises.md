@@ -1,5 +1,64 @@
 # Project exercises
 
+## EX 1.06
+
+Created [service.yaml](./manifests/service.yaml) file for getting access to the project.
+
+- Deleted the old cluster
+```bash
+project % k3d cluster delete            
+INFO[0000] Deleting cluster 'k3s-default'               
+INFO[0003] Deleting cluster network 'k3d-k3s-default'   
+INFO[0003] Deleting 1 attached volumes...               
+INFO[0003] Removing cluster details from default kubeconfig... 
+INFO[0003] Removing standalone kubeconfig file (if there is one)... 
+INFO[0003] Successfully deleted cluster k3s-default!
+```
+
+- Create the new cluster
+    ```bash
+    k3d cluster create --port 8082:30080@agent:0 -p 8081:80@loadbalancer --agents 2 
+    INFO[0000] portmapping '8081:80' targets the loadbalancer: defaulting to [servers:*:proxy agents:*:proxy] 
+    INFO[0000] Prep: Network                                
+    INFO[0000] Created network 'k3d-k3s-default'            
+    INFO[0000] Created image volume k3d-k3s-default-images  
+    INFO[0000] Starting new tools node...                   
+    INFO[0000] Starting node 'k3d-k3s-default-tools'        
+    INFO[0001] Creating node 'k3d-k3s-default-server-0'     
+    INFO[0001] Creating node 'k3d-k3s-default-agent-0'      
+    INFO[0001] Creating node 'k3d-k3s-default-agent-1'      
+    INFO[0001] Creating LoadBalancer 'k3d-k3s-default-serverlb' 
+    INFO[0001] Using the k3d-tools node to gather environment information 
+    INFO[0001] Starting new tools node...                   
+    INFO[0001] Starting node 'k3d-k3s-default-tools'        
+    INFO[0002] Starting cluster 'k3s-default'               
+    INFO[0002] Starting servers...                          
+    INFO[0002] Starting node 'k3d-k3s-default-server-0'     
+    INFO[0006] Starting agents...                           
+    INFO[0006] Starting node 'k3d-k3s-default-agent-1'      
+    INFO[0006] Starting node 'k3d-k3s-default-agent-0'      
+    INFO[0010] Starting helpers...                          
+    INFO[0010] Starting node 'k3d-k3s-default-serverlb'     
+    INFO[0017] Injecting records for hostAliases (incl. host.k3d.internal) and for 5 network members into CoreDNS configmap... 
+    INFO[0019] Cluster 'k3s-default' created successfully!  
+    INFO[0019] You can now use it like this:                
+    kubectl cluster-info
+    ```
+- Apply deployment manifest and the service manifest
+    ```bash
+    kubectl apply -f manifests/deployment.yaml
+    deployment.apps/dwkproject-dep created
+
+    kubectl apply -f manifests/service.yaml   
+    service/dwkproject-svc created
+    ```
+- Check that the project is served on port 8082
+    ```bash
+    curl localhost:8082
+
+    <html><head><title>DWK project</title></head><body><h1>Hello world!</h1></body></html>                                                                    
+    ```
+
 ## EX 1.05
 
 Created simple static html template with Pug that is served on requests on the route '/'.
