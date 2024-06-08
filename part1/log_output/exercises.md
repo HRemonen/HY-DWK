@@ -1,5 +1,27 @@
 # Log output exercises
 
+## EX 1.07
+
+As we already had our cluster ports set up by following the material the Ingress port is available on port 8081 locally.
+
+- Updated the logic to an Express API and added the endpoint to query the current time and string
+- Created [service.yaml](./manifests/service.yaml) and [ingress.yaml](./manifests/ingress.yaml) files
+- Updated the [deploymen.yaml](./manifests/deployment.yaml) image verion
+- Build and pushed the new image hremonen/logoutput:1.07 to Docker hub
+- Applied all of the manifests
+    ```bash
+    kubectl apply -f manifests/
+
+    deployment.apps/logoutput-dep created
+    ingress.networking.k8s.io/logoutput-ingress created
+    service/logoutput-svc created
+    ```
+- Checked that the application is running locally on port 8081
+    ```bash
+    curl localhost:8081
+    2024-06-08T14:28:06.054Z: 150f377c-2053-45ed-9303-a58f7d51a9f9
+    ```
+
 ## EX 1.03
 
 I already did make the deployment file in the ex 1.01 so this is done already. However this is what I did:
