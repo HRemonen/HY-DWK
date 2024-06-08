@@ -2,7 +2,56 @@
 
 ## EX 1.04
 
-I already did make the deployment file in the ex 1.02 so this is done already.
+I already did make the deployment file in the ex 1.01 so this is done already. However this is what I did:
+
+- Updated the name of the deployment from webserver to dwkproject in deployment.yaml
+- Built the new image hremonen/dwkproject:1.04
+- Pushed hremonen/dwkproject:1.04 to Docker hub
+- Create kubernetes deployment named **dwkproject-dep**
+    ```bash
+    kubectl apply -f manifest/deployment.yaml
+
+    deployment.apps/dwkproject-dep created
+    ```
+- Checked that everything works 
+    ```bash
+    kubectl get pods
+
+    NAME                              READY   STATUS    RESTARTS   AGE
+    logoutput-dep-6fc56d45b5-tdkt2    1/1     Running   0          16m
+    dwkproject-dep-556598b557-stngg   1/1     Running   0          19s
+
+    kubectl logs -f dwkproject-dep-556598b557-stngg
+
+    > project@1.0.0 start
+    > node index.js
+
+    Server started in port 8000
+    ```
+- Update the port ENV variable in deployment from 8000 to 8080
+- Update the deployment
+    ```bash
+    kubectl apply -f manifest/deployment.yaml
+
+    deployment.apps/dwkproject-dep configured
+    ```
+- Check the new pod
+    ```bash
+    kubectl get pods
+
+    NAME                              READY   STATUS    RESTARTS   AGE
+    logoutput-dep-6fc56d45b5-tdkt2    1/1     Running   0          18m
+    dwkproject-dep-86bb549c65-8zcjv   1/1     Running   0          13s
+
+    kubectl logs -f dwkproject-dep-86bb549c65-8zcjv
+    
+    > project@1.0.0 start
+    > node index.js
+
+    Server started in port 8080
+    ```
+    
+
 
 ## EX 1.02
 
