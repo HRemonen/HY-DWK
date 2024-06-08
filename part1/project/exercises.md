@@ -1,5 +1,30 @@
 # Project exercises
 
+## EX 1.08
+
+As we already had our cluster ports set up by following the material the Ingress port is available on port 8081 locally.
+
+- Deleted logoutput ingress with 
+```bash
+    kubectl delete -f ../log_output/manifests/ingress.yaml
+    ingress.networking.k8s.io "logoutput-ingress" deleted
+```
+- Created [service.yaml](./manifests/service.yaml) and [ingress.yaml](./manifests/ingress.yaml) files
+- Applied all of the manifests
+    ```bash
+    kubectl apply -f manifests/
+
+    deployment.apps/dwkproject-dep unchanged
+    ingress.networking.k8s.io/dwkproject-ingress created
+    service/dwkproject-svc created
+    ```
+- Checked that the application is running locally on port 8081
+    ```bash
+    curl localhost:8081
+
+    <html><head><title>DWK project</title></head><body><h1>Hello world!</h1></body></html>
+    ```
+
 ## EX 1.06
 
 Created [service.yaml](./manifests/service.yaml) file for getting access to the project.
