@@ -2,7 +2,49 @@
 
 ## EX 1.03
 
-I already did make the deployment file in the ex 1.01 so this is done already.
+I already did make the deployment file in the ex 1.01 so this is done already. However this is what I did:
+
+- Updated the name of the deployment from uuidgenerator to logoutput in deployment.yaml
+- Built the new image hremonen/logoutput:1.03
+- Pushed hremonen/logoutput:1.03 to Docker hub
+- Create kubernetes deployment named **logoutput-dep**
+    ```bash
+    kubectl create deployment logoutput-dep --image=hremonen/logoutput:1.03
+
+    deployment.apps/logoutput-dep created
+    ```
+- Checked that everything works 
+    ```bash
+    log_output % kubectl get pods
+
+    NAME                             READY   STATUS    RESTARTS   AGE
+    logoutput-dep-6fc56d45b5-tdkt2   1/1     Running   0          76s
+
+    log_output % kubectl logs -f logoutput-dep-6fc56d45b5-tdkt2
+
+    > log_output@1.0.0 start
+    > node index.js
+
+    2024-06-08T06:55:07.399Z: 4351e10f-450f-4f5a-85b2-81a001477e21
+    2024-06-08T06:55:12.410Z: 4351e10f-450f-4f5a-85b2-81a001477e21
+    2024-06-08T06:55:17.413Z: 4351e10f-450f-4f5a-85b2-81a001477e21
+    2024-06-08T06:55:22.418Z: 4351e10f-450f-4f5a-85b2-81a001477e21
+    2024-06-08T06:55:27.422Z: 4351e10f-450f-4f5a-85b2-81a001477e21
+    2024-06-08T06:55:32.423Z: 4351e10f-450f-4f5a-85b2-81a001477e21
+    2024-06-08T06:55:37.426Z: 4351e10f-450f-4f5a-85b2-81a001477e21
+    2024-06-08T06:55:42.427Z: 4351e10f-450f-4f5a-85b2-81a001477e21
+    2024-06-08T06:55:47.434Z: 4351e10f-450f-4f5a-85b2-81a001477e21
+    2024-06-08T06:55:52.443Z: 4351e10f-450f-4f5a-85b2-81a001477e21
+    2024-06-08T06:55:57.449Z: 4351e10f-450f-4f5a-85b2-81a001477e21
+    2024-06-08T06:56:02.454Z: 4351e10f-450f-4f5a-85b2-81a001477e21
+    2024-06-08T06:56:07.460Z: 4351e10f-450f-4f5a-85b2-81a001477e21
+    2024-06-08T06:56:12.466Z: 4351e10f-450f-4f5a-85b2-81a001477e21
+    2024-06-08T06:56:17.469Z: 4351e10f-450f-4f5a-85b2-81a001477e21
+    2024-06-08T06:56:22.470Z: 4351e10f-450f-4f5a-85b2-81a001477e21
+    2024-06-08T06:56:27.476Z: 4351e10f-450f-4f5a-85b2-81a001477e21
+    2024-06-08T06:56:32.481Z: 4351e10f-450f-4f5a-85b2-81a001477e21
+    2024-06-08T06:56:37.487Z: 4351e10f-450f-4f5a-85b2-81a001477e21
+    ```
 
 ## Ex 1.01 
 

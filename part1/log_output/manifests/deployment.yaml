@@ -1,17 +1,17 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: uuidgenerator
+  name: logoutput
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: uuidgenerator
+      app: logoutput
   template:
     metadata:
       labels:
-        app: uuidgenerator
+        app: logoutput
     spec:
       containers:
-        - name: uuidgenerator
-          image: hremonen/uuidgenerator:1.01
+        - name: logoutput
+          image: hremonen/logoutput:1.03

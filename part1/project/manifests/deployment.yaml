@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: webserver
-          image: hremonen/webserver:1.02
+          image: hremonen/webserver:1.04
           env:
            - name: PORT
              value: "8000"
