@@ -1,3 +1,11 @@
+# Project excercises
+
+## EX 1.04
+
+I already did make the deployment file in the ex 1.02 so this is done already.
+
+## EX 1.02
+
 Before these steps I built and pushed the image to docker hub - not interesting stuff
 
 ---
@@ -33,3 +41,5 @@ Server started in port 8000
 
 As we can see the port is defined in the [deployment](./manifests/deployment.yaml) as the containers env variable. Locally .env file is used to define the port.
 If that shit wouldn't work it should of been 3000.
+
+----
