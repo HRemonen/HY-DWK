@@ -5,7 +5,7 @@ const PORT = 3000
 
 let counter = 0
 
-app.get('/pingpong', (req, res) => {
+app.get('/', (req, res) => {
   const counterValue = counter
   
   counter += 1
