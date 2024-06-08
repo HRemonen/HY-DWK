@@ -1,21 +1,15 @@
-import crypto from 'crypto'
 import express from 'express'
 
 const app = express()
 const PORT = 3000
 
-const randomUUID = crypto.randomUUID()
-
-const getHashNow = () => {
-  const timeStamp = new Date().toISOString()
-
-  return `${timeStamp}: ${randomUUID}`
-}
+let counter = 0
 
 app.get('/', (req, res) => {
-  const hash = getHashNow()
-
-  res.send(hash)
+  const counterValue = counter
+  
+  counter += 1
+  res.send(`pong ${counterValue}`)
 })
 
 app.listen(PORT, () => {
