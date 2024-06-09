@@ -1,5 +1,65 @@
 # Log output exercises
 
+## EX 1.10
+
+Split the application into two; [the generator](./src/generator/) and [the server](./src/server/). The generator produces a hash and every five seconds writes the current timestamp and the hash to a file in [the logs directory](./src/generator/logs/). This directory is then read by the server to display the hash to user.
+
+- Created the new app for the Generator
+- Built the new image hremonen/logoutput-generator:1.10
+- Pushed hremonen/logoutput-generator:1.10 to Docker hub
+- Updated the old logoutput app to read from the file
+- Built the new image hremonen/logoutput:1.10
+- Pushed hremonen/logoutput:1.10 to Docker hub
+- Updated the [deploymen.yaml](./manifests/deployment.yaml) to have two containers; the generator and the server and the volume logoutput-vol
+- Apply all of the manifests
+    ```hash
+    kubectl apply -f manifests/
+
+    deployment.apps/logoutput-dep configured
+    ingress.networking.k8s.io/logoutput-ingress unchanged
+    service/logoutput-svc unchanged
+    ```
+- Check the logs for the logoutput generator that it is working
+    ```bash
+    kubectl get pods    
+
+    NAME                             READY   STATUS    RESTARTS   AGE
+    pingpong-dep-5f685fbd94-gfxql    1/1     Running   0          15h
+    logoutput-dep-76ff49c48f-dwf9v   2/2     Running   0          5m
+
+    kubectl logs logoutput-dep-76ff49c48f-dwf9v logoutput-generator
+
+    > log_output_generator@1.0.0 start
+    > node index.js
+
+    2024-06-09T08:11:54.411Z: 71f7e48d-efd2-4f4b-abe8-5cdd4058d5e0
+    2024-06-09T08:11:59.414Z: 71f7e48d-efd2-4f4b-abe8-5cdd4058d5e0
+    ```
+- Check that the message is available on localhost
+    ```bash
+    curl localhost:8081
+
+    2024-06-09T08:13:54.502Z: 71f7e48d-efd2-4f4b-abe8-5cdd4058d5e0%                                                                                                                                      
+    curl localhost:8081
+
+    2024-06-09T08:14:04.509Z: 71f7e48d-efd2-4f4b-abe8-5cdd4058d5e0%                                                                                                                                      
+    curl localhost:8081
+
+    2024-06-09T08:14:04.509Z: 71f7e48d-efd2-4f4b-abe8-5cdd4058d5e0%                                                                                                                                      
+    curl localhost:8081
+
+    2024-06-09T08:14:04.509Z: 71f7e48d-efd2-4f4b-abe8-5cdd4058d5e0%                                                                                                                                      
+    curl localhost:8081
+
+    2024-06-09T08:14:04.509Z: 71f7e48d-efd2-4f4b-abe8-5cdd4058d5e0%                                                                                                                                      
+    curl localhost:8081
+
+    2024-06-09T08:14:09.515Z: 71f7e48d-efd2-4f4b-abe8-5cdd4058d5e0%                                                                                                                                      
+    curl localhost:8081
+
+    2024-06-09T08:14:09.515Z: 71f7e48d-efd2-4f4b-abe8-5cdd4058d5e0
+    ```
+
 ## EX 1.07
 
 As we already had our cluster ports set up by following the material the Ingress port is available on port 8081 locally.

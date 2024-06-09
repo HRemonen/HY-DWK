@@ -14,4 +14,15 @@ spec:
     spec:
       containers:
         - name: logoutput
-          image: hremonen/logoutput:1.07
+          image: hremonen/logoutput:1.10
+          volumeMounts:
+            - name: logoutput-vol
+              mountPath: /usr/src/app/logs
+        - name: logoutput-generator
+          image: hremonen/logoutput-generator:1.10
+          volumeMounts:
+            - name: logoutput-vol
+              mountPath: /usr/src/app/logs
+      volumes:
+        - name: logoutput-vol
+          emptyDir: {}
