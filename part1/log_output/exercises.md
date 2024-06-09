@@ -2,7 +2,7 @@
 
 ## EX 1.10
 
-Split the application into two; [the generator](./src/generator/) and [the server](./src/server/). The generator produces a hash and every five seconds writes the current timestamp and the hash to a file in [the logs directory](./src/generator/logs/). This directory is then read by the server to display the hash to user.
+Split the application into two; [the generator](./src/generator/) and [the server](./src/server/). The generator produces a hash and every five seconds writes the current timestamp and the hash to a file in the defined [volume](./manifests/deployment.yaml#26). This directory is then read by the server to display the hash to user.
 
 - Created the new app for the Generator
 - Built the new image hremonen/logoutput-generator:1.10
