@@ -1,5 +1,19 @@
 # Ping pong exercises
 
+## EX 1.11
+
+See other steps in logoutput dir also.
+
+- Updated the [deployment](./manifests/deployment.yaml) to use the pvc we just created to create a volume for the containers
+- Updated the logic for index.js to save to the file the pong count
+- Built the new image hremonen/pingpong:1.11
+- Pushed hremonen/pingpong:1.11 to Docker hub
+- Applied the new manifest
+    ```bash
+    kubectl apply -f manifests/deployment.yaml
+    deployment.apps/pingpong-dep configured
+    ```
+
 ## EX 1.09
 
 - Create project files etc.

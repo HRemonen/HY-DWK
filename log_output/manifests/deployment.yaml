@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: logoutput
-          image: hremonen/logoutput:1.10
+          image: hremonen/logoutput:1.11
           volumeMounts:
             - name: logoutput-vol
               mountPath: /usr/src/app/logs
@@ -25,4 +25,5 @@ spec:
               mountPath: /usr/src/app/logs
       volumes:
         - name: logoutput-vol
-          emptyDir: {}
+          persistentVolumeClaim:
+            claimName: logoutput-claim

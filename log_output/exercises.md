@@ -1,5 +1,53 @@
 # Log output exercises
 
+## EX 1.11
+
+- Created the dir /tmp/kube in the container k3d-k3s-default-agent-0
+    ```bash
+    docker exec k3d-k3s-default-agent-0 mkdir -p /tmp/kube
+    ```
+- Created upper level [manifest dir](./../manifests/) and add the persistent volume manifest there
+- Created the [persistent volume claim](./manifests/persistentvolumeclaim.yaml) manifest in to the logoutput dir
+- Update the [deployment](./manifests/deployment.yaml) to use the pvc we just created to create a volume for the containers
+- Apply the persistent volume and the persistent volume claim
+    ```bash
+    kubectl apply -f manifests/persistentvolume.yaml
+    persistentvolume/master-pv created
+
+    kubectl apply -f log_output/manifests/persistentvolumeclaim.yaml
+    persistentvolumeclaim/logoutput-claim created
+    ```
+- Apply the changes to the logoutput deployment
+    ```bash
+    kubectl apply -f log_output/manifests/deployment.yaml
+    deployment.apps/logoutput-dep configured
+    ```
+- Updated the logic for index.js to get the pong count from file saved to the volume
+- Built the new image hremonen/logoutput:1.11
+- Pushed hremonen/logoutput:1.11 to Docker hub
+- Apply the deployment changes
+    ```bash
+    kubectl apply -f manifests/
+    deployment.apps/logoutput-dep configured
+    ```
+- Check that everything is working
+    ```bash
+    curl localhost:8081/pingpong
+    pong 0
+
+    curl localhost:8081         
+    2024-06-09T10:55:59.761Z: bafa3e81-2d0d-4499-b880-a450fe5e02fb. Ping / Pongs: 0
+
+    curl localhost:8081/pingpong 
+    pong 1
+
+    curl localhost:8081/pingpong
+    pong 2
+
+    curl localhost:8081         
+    2024-06-09T10:56:14.776Z: bafa3e81-2d0d-4499-b880-a450fe5e02fb. Ping / Pongs: 2
+
+
 ## EX 1.10
 
 Split the application into two; [the generator](./src/generator/) and [the server](./src/server/). The generator produces a hash and every five seconds writes the current timestamp and the hash to a file in the defined [volume](./manifests/deployment.yaml#26). This directory is then read by the server to display the hash to user.
