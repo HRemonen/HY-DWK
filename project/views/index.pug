@@ -1,6 +1,27 @@
 html
   head
     title= title
+    script.
+      function validateInput() {
+        var input = document.getElementById('todo-input');
+        if (input.value.length > 140) {
+          alert('Todo cannot be more than 140 characters');
+          return false;
+        }
+        return true;
+      }
   body
     h1= message
-  img(src='image.jpeg', alt='')
+    img(src='image.jpeg', alt='', style='width: 300px; height: auto;')
+
+    //- Input field and send button
+    form(onSubmit="return validateInput()")
+      input#todo-input(type='text', maxlength='140', placeholder='Enter your todo')
+      button(type='submit') Send
+
+    //- List of hardcoded todos
+    ul
+      li Todo 1
+      li Todo 2
+      li Todo 3
+      li Todo 4

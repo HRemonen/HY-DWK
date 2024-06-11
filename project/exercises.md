@@ -1,5 +1,18 @@
 # Project exercises
 
+## EX 1.13
+
+- Updated the [index.pug](./views/index.pug) file to have the input and some predefined todo items
+- Built the new image hremonen/dwkproject:1.13
+- Pushed hremonen/dwkproject:1.13 to Docker hub
+- Update the [deployment](./manifests/deployment.yaml) container image
+- Apply the changes to the dwkproject deployment
+    ```bash
+    kubectl apply -f /manifests/deployment.yaml
+    deployment.apps/dwkproject-dep configured
+    ```
+- Check that everything works
+
 ## EX 1.12
 
 - Updated the logic for index.js to fetch the file every hour and save it to image.jpeg
