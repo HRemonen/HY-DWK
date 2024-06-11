@@ -12,9 +12,16 @@ spec:
       labels:
         app: dwkproject
     spec:
+      volumes:
+        - name: dwkproject-vol
+          persistentVolumeClaim:
+            claimName: dwkproject-claim
       containers:
         - name: dwkproject
-          image: hremonen/dwkproject:1.05
+          image: hremonen/dwkproject:1.12_2
+          volumeMounts:
+            - name: dwkproject-vol
+              mountPath: /usr/src/app/files
           env:
            - name: PORT
              value: "8080"

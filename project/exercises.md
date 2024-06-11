@@ -1,5 +1,24 @@
 # Project exercises
 
+## EX 1.12
+
+- Updated the logic for index.js to fetch the file every hour and save it to image.jpeg
+- Built the new image hremonen/dwkproject:1.12_2
+- Pushed hremonen/dwkproject:1.12_2 to Docker hub
+- Added the [persistenVolumeClaim.yaml](./manifests/persistentVolumeClaim.yaml)
+- Update the [deployment](./manifests/deployment.yaml) to use the pvc we just created to create a volume for the containers
+- Apply the persistent volume claim
+    ```bash
+    kubectl apply -f /manifests/persistentvolumeclaim.yaml
+    persistentvolumeclaim/dwkproject-claim created
+    ```
+- Apply the changes to the dwkproject deployment
+    ```bash
+    kubectl apply -f /manifests/deployment.yaml
+    deployment.apps/dwkproject-dep configured
+    ```
+- Checked that everything works. Here curl is not really helpful but checking with the browser we can see that the image stays the same even if the deployment is deleted and applied again.
+
 ## EX 1.08
 
 As we already had our cluster ports set up by following the material the Ingress port is available on port 8081 locally.
