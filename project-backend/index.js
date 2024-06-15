@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express()
 
-const PORT = process.env.PORT || 3000
+const PORT = 8000
 
 const TODOS = [
   { id: 1, title: 'Todo 1' },

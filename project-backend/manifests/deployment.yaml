@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dwkproject-backend-dep
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dwkproject-backend
+  template:
+    metadata:
+      labels:
+        app: dwkproject-backend
+    spec:
+      containers:
+        - name: dwkproject-backend
+          image: hremonen/dwkproject-backend:2.02
