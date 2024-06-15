@@ -1,5 +1,4 @@
 import express from 'express'
-import cors from 'cors'
 
 const app = express()
 const PORT = 8000
@@ -10,7 +9,6 @@ const TODOS = [
   { id: 3, title: 'Todo 3' },
 ]
 
-app.use(cors())
 app.use(express.json())
 
 app.get('/', (req, res) => {
