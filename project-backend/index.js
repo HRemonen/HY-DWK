@@ -1,11 +1,37 @@
 const express = require('express')
 const app = express()
-const port = 3000
+
+const PORT = process.env.PORT || 3000
+
+const TODOS = [
+  { id: 1, title: 'Todo 1' },
+  { id: 2, title: 'Todo 2' },
+  { id: 3, title: 'Todo 3' },
+]
+
+app.use(cors())
+app.use(express.json())
 
 app.get('/', (req, res) => {
-  res.send('Hello World!')
+  res.send('Ping backend')
 })
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
+app.get('/todos', (req, res) => {
+  res.json({ status: 'success', data: TODOS })
+})
+
+app.post('/todos', (req, res) => {
+  const { title } = req.body
+  
+  if (!title) {
+    return res.status(400).json({ status: 'error', message: 'Title is required' })
+  }
+
+  TODOS.push({ id: TODOS.length + 1, title })
+
+  res.status(201).json({ status: 'success', message: 'Todo created' })
+})
+
+app.listen(PORT, () => {
+  console.log(`Example app listening on port ${PORT}`)
 })
