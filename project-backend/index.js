@@ -1,6 +1,7 @@
-const express = require('express')
-const app = express()
+import express from 'express'
+import cors from 'cors'
 
+const app = express()
 const PORT = 8000
 
 const TODOS = [
@@ -33,5 +34,5 @@ app.post('/todos', (req, res) => {
 })
 
 app.listen(PORT, () => {
-  console.log(`Example app listening on port ${PORT}`)
+  console.log(`Project backend listening on port ${PORT}`)
 })
