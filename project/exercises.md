@@ -1,5 +1,18 @@
 # Project exercises
 
+## EX 2.02
+
+- Create new [backend](../project-backend/) and all the functionality needed 
+- Built the new image hremonen/dwkproject-backend:2.02
+- Pushed hremonen/dwkproject-backend:2.02 to Docker hub
+- Created [deployment and service](../project-backend/manifests/) for the backend
+- Updated [ingress](./manifests/ingress.yaml) to take care of the routing to the /todos route
+- Updated dwkproject logic and template files accordingly
+- Built the new image hremonen/dwkproject:2.02
+- Pushed hremonen/dwkproject:2.02 to Docker hub
+- Applied the changes to deployment and ingress
+- Check that everything works
+
 ## EX 1.13
 
 - Updated the [index.pug](./views/index.pug) file to have the input and some predefined todo items
