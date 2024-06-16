@@ -14,4 +14,4 @@ spec:
     spec:
       containers:
         - name: dwkproject-backend
-          image: hremonen/dwkproject-backend:2.02_2
+          image: hremonen/dwkproject-backend:2.02_7
