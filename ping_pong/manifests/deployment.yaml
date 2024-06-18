@@ -14,4 +14,4 @@ spec:
     spec:
       containers:
         - name: pingpong
-          image: hremonen/pingpong:1.11
+          image: hremonen/pingpong:2.01

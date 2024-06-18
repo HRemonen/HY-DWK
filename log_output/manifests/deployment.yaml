@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: logoutput
-          image: hremonen/logoutput:2.01_1
+          image: hremonen/logoutput:2.01_3
           volumeMounts:
             - name: logoutput-vol
               mountPath: /usr/src/app/logs
