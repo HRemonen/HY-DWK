@@ -10,8 +10,9 @@ const generateNewHash = () => {
   return `${timeStamp}: ${randomUUID}`
 }
 
-const getHash = () => hash
+export const getHash = () => hash
 
+hash = generateNewHash()
 setInterval(async () => {
   hash = generateNewHash()
 
