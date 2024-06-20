@@ -1,5 +1,15 @@
 # Log output exercises
 
+## EX 2.01
+
+- Updated the [server index.js](./src/server/index.js) to get the pingpong status from the pingpong service rather than from the file which is now deprecated
+- Built new image hremonen/logoutput:2.01
+- pushed the hremonen/logoutput:2.01 to Docker hub
+- Built new image hremonen/logoutput_generator:2.01
+- pushed the hremonen/logoutput_generator:2.01 to Docker hub
+- Applied the changed manifests
+- Checked that everything works
+
 ## EX 1.11
 
 - Created the dir /tmp/kube in the container k3d-k3s-default-agent-0

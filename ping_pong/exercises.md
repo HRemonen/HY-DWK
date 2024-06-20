@@ -1,5 +1,13 @@
 # Ping pong exercises
 
+## EX 2.01
+
+- Updated the [index.js](./index.js) to serve the number of pings as http response rather than saving to the file
+- Built new image hremonen/pingpong:2.01
+- pushed the hremonen/pingpong:2.01 to Docker hub
+- Removed the volume mount from the container
+- Applied the updated [deploymen.yaml](./manifests/deployment.yaml)
+
 ## EX 1.11
 
 See other steps in logoutput dir also.
