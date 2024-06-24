@@ -1,5 +1,15 @@
 # Log output exercises
 
+## EX 2.06
+
+- Created a new manifest [configmap](./manifests/configmap.yaml)
+- Updated the [deployment.yaml](./manifests/deployment.yaml)
+- Updated the logic for [index.js](./src/server/index.js)
+- Built new image hremonen/logoutput:2.06
+- Pushed the new image hremonen/logoutput to Docker hub
+- Applied the new and changed manifests
+- Checked that everything is working
+
 ## EX 2.03
 
 Created a new namespace **dwk-exercises** 
