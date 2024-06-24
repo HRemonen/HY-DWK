@@ -1,5 +1,15 @@
 # Log output exercises
 
+## EX 2.03
+
+Created a new namespace **dwk-exercises** 
+```bash
+kubectl create namespace dwk-exercises
+namespace/dwk-exercises created
+```
+
+- Updated the metadata on every [manifest](./manifests/)
+
 ## EX 2.01
 
 - Updated the [server index.js](./src/server/index.js) to get the pingpong status from the pingpong service rather than from the file which is now deprecated

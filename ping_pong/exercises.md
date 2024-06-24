@@ -1,5 +1,16 @@
 # Ping pong exercises
 
+## EX 2.03
+
+Created a new namespace **dwk-exercises** 
+```bash
+kubectl create namespace dwk-exercises
+namespace/dwk-exercises created
+```
+
+- Updated the metadata on every [manifest](./manifests/)
+
+
 ## EX 2.01
 
 - Updated the [index.js](./index.js) to serve the number of pings as http response rather than saving to the file
