@@ -28,7 +28,8 @@ app.get('/', async (req, res) => {
     .catch(err => res.status(500).send(err.message)
   )
   
-  res.write(pingpong).end()
+  res.write(pingpong)
+  res.end()
 })
 
 

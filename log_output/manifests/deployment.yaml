@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: logoutput
-          image: hremonen/logoutput:2.06_1
+          image: hremonen/logoutput:2.06_2
           envFrom:
             - configMapRef:
                 name: logoutput-configmap
