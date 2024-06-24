@@ -1,5 +1,53 @@
 # Project exercises
 
+## EX 2.04
+
+- Created a new namespace **dwk-project**
+    ```bash
+    kubectl create namespace dwk-project  
+    namespace/dwk-project created
+    ```
+- Deleted old manifests while in the default namespace
+    ```bash
+    kubectl delete -f manifests/
+
+    deployment.apps "dwkproject-dep" deleted
+    ingress.networking.k8s.io "dwkproject-ingress" deleted
+    persistentvolumeclaim "dwkproject-claim" deleted
+    service "dwkproject-svc" deleted
+    ```
+
+    ```bash
+    kubectl delete -f manifests/
+
+    deployment.apps "dwkproject-backend-dep" deleted
+    service "dwkproject-backend-svc" deleted
+    ```
+- Switched to the new namespace
+    ```bash
+    kubens dwk-project
+
+    Context "k3d-k3s-default" modified.
+    Active namespace is "dwk-project".
+    ```
+- Updated the manifests to use the newly created namespace
+- Re-applied the manifests
+    ```bash
+    kubectl apply -f manifests/
+
+    deployment.apps/dwkproject-dep created
+    ingress.networking.k8s.io/dwkproject-ingress created
+    persistentvolumeclaim/dwkproject-claim created
+    service/dwkproject-svc created
+    ```
+
+    ```bash
+    kubectl apply -f manifests/
+
+    deployment.apps/dwkproject-backend-dep created
+    service/dwkproject-backend-svc created
+    ```
+
 ## EX 2.02
 
 - Create new [backend](../project-backend/) and all the functionality needed 
