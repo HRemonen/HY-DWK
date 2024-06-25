@@ -1,5 +1,23 @@
 # Ping pong exercises
 
+- Created new [service and stateful](./manifests/postgres.yaml) set for the postgres database
+- Created secrets for the database -- I did not feel like encrypting so I just omitted it from git
+    ```yaml
+        apiVersion: v1
+        kind: Secret
+        metadata:
+        name: postgres-secret
+        namespace: dwk-exercises
+        data:
+        POSTGRES_PASSWORD: <INSERT PASSWORD OF CHOICE>
+    ```
+- Created [file](./database.js) to handle the databse connection
+- Updated the [index.js] accordingly to save the pongs to DB
+- Built new image hremonen/pingpong:2.07
+- pushed the hremonen/pingpong:2.07 to Docker hub
+- Applied the new and changed manifests
+- Checked that everything is working -- also when the pods are deleted the pong count should remain
+
 ## EX 2.03
 
 Created a new namespace **dwk-exercises** 
