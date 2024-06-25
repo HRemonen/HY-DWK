@@ -1,5 +1,7 @@
 # Ping pong exercises
 
+## EX 2.07
+
 - Created new [service and stateful](./manifests/postgres.yaml) set for the postgres database
 - Created secrets for the database -- I did not feel like encrypting so I just omitted it from git
     ```yaml
@@ -18,6 +20,7 @@
 - Applied the new and changed manifests
 - Checked that everything is working -- also when the pods are deleted the pong count should remain
 
+
 ## EX 2.03
 
 Created a new namespace **dwk-exercises** 
@@ -27,7 +30,6 @@ namespace/dwk-exercises created
 ```
 
 - Updated the metadata on every [manifest](./manifests/)
-
 
 ## EX 2.01
 
