@@ -15,4 +15,10 @@ spec:
     spec:
       containers:
         - name: pingpong
-          image: hremonen/pingpong:2.01
+          image: hremonen/pingpong:2.07_4
+          env:
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: POSTGRES_PASSWORD
