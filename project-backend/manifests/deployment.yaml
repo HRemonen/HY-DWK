@@ -15,4 +15,10 @@ spec:
     spec:
       containers:
         - name: dwkproject-backend
-          image: hremonen/dwkproject-backend:2.02_7
+          image: hremonen/dwkproject-backend:2.08_8
+          env:
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: project-db-secret
+                  key: POSTGRES_PASSWORD
