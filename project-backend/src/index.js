@@ -4,6 +4,7 @@ import cors from "cors";
 import { connectToDatabase } from "./database/connection.js";
 import seedTodos from "./database/seeders/todos.js";
 import Todo from "./database/models/Todo.js";
+import errorHandler from "./middleware/error.js";
 
 const app = express();
 const PORT = 8000;
@@ -35,6 +36,8 @@ app.post("/todos", async (req, res) => {
 
   res.status(201).json({ status: "success", message: "Todo created" });
 });
+
+app.use(errorHandler);
 
 app.listen(PORT, async () => {
   console.log(`Project backend listening on port ${PORT}`);
