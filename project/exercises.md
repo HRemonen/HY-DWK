@@ -1,5 +1,34 @@
 # Project exercises
 
+## EX 2.09
+
+- Created a new "application" [project-cron](../project-cron/) which is just a script that calls the backend with the random wikipedia article to read
+- Built new image hremonen/create-todo
+- Pushed the new image hremonen/create-todo to Docker hub
+- Created [cronjob](../project-backend/manifests/todocron.yaml) which uses this new application every hour to create a new todo
+- Applied the changed manifests 
+- Checked that the todo is created successfully every hour
+
+## EX 2.08
+
+- Created new [manifest](../project-backend/manifests/postgres.yaml) set for the postgres database
+- Created secrets for the database -- I did not feel like encrypting so I just omitted it from git
+    ```yaml
+        apiVersion: v1
+        kind: Secret
+        metadata:
+            name: project-db-secret
+            namespace: dwk-project
+        data:
+            POSTGRES_PASSWORD: <INSERT PASSWORD OF CHOICE>
+    ```
+- Created [dir](../project-backend/src/database/) to handle the databse related stuff such as the models, connection, migrations and seeders
+- Updated the [index.js](../project-backend/src/index.js) accordingly to save the todos to db
+- Built new image hremonen/dwkproject-backend:2.08
+- pushed the hremonen/dwkproject-backend:2.08 to Docker hub
+- Applied the new and changed manifests
+- Checked that everything is working -- also when the pods are deleted the todos should remain
+
 ## EX 2.04
 
 - Created a new namespace **dwk-project**
