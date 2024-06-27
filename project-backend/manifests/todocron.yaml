@@ -1,0 +1,16 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: todo-cron
+  namespace: dwk-project
+spec:
+  schedule: "@hourly"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: create-todo
+              image: hremonen/create-todo:latest
+              imagePullPolicy: Always
+          restartPolicy: OnFailure
