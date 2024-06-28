@@ -6,6 +6,7 @@ import seedTodos from "./database/seeders/todos.js";
 import Todo from "./database/models/Todo.js";
 import errorHandler from "./middleware/error.js";
 import logger from "./utils/logger.js";
+import { validateTodo } from "./utils/validator.js";
 
 const app = express();
 const PORT = 8000;
@@ -25,15 +26,19 @@ app.get("/todos", async (req, res) => {
 });
 
 app.post("/todos", async (req, res) => {
-  const { title } = req.body;
+  const todo = req.body;
 
-  if (!title) {
-    logger.error("Title is required", { title });
+  const validationErrors = validateTodo(req.body);
+
+  if (validationErrors.length > 0) {
+    logger.error("Validation failed", { errors: validationErrors });
 
     return res
       .status(400)
-      .json({ status: "error", message: "Title is required" });
+      .json({ status: "error", data: validationErrors });
   }
+
+  const { title } = todo;
 
   await Todo.create({ title });
 
