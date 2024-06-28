@@ -5,6 +5,7 @@ import { connectToDatabase } from "./database/connection.js";
 import seedTodos from "./database/seeders/todos.js";
 import Todo from "./database/models/Todo.js";
 import errorHandler from "./middleware/error.js";
+import logger from "./utils/logger.js";
 
 const app = express();
 const PORT = 8000;
@@ -27,6 +28,8 @@ app.post("/todos", async (req, res) => {
   const { title } = req.body;
 
   if (!title) {
+    logger.error("Title is required", { title });
+
     return res
       .status(400)
       .json({ status: "error", message: "Title is required" });
@@ -34,13 +37,15 @@ app.post("/todos", async (req, res) => {
 
   await Todo.create({ title });
 
+  logger.info("Todo created", { title });
+
   res.status(201).json({ status: "success", message: "Todo created" });
 });
 
 app.use(errorHandler);
 
 app.listen(PORT, async () => {
-  console.log(`Project backend listening on port ${PORT}`);
+  logger.info(`Server is running on PORT: ${PORT}`);
 
   await connectToDatabase();
 
