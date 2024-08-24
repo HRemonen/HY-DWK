@@ -1,5 +1,38 @@
 # Ping pong exercises
 
+## EX 3.91
+
+- Created the GKE project as in the course material
+- Enabled container.googleapis.com
+- Created container cluster dwk-cluster
+    ```bash
+    gcloud container clusters create dwk-cluster --zone=europe-north1-b --cluster-version=1.29
+    ```
+- Created namespace `dwk-exercises` to the cluster
+    ```bash
+    kubectl create namespace dwk-exercises
+    ```
+- Updated the manifests
+- Needed to build new Docker image bc of GKE can not use ARM built images or w/e
+- Applied manifests
+- Checked that everything works
+    ```bash
+    kgs -n dwk-exercises  
+
+    NAME           TYPE           CLUSTER-IP      EXTERNAL-IP   PORT(S)        AGE
+    pingpong-svc   LoadBalancer   34.118.232.17   34.88.68.32   80:31186/TCP   8m2s
+    postgres-svc   ClusterIP      None            <none>        5432/TCP       8m3s
+
+    curl http://34.88.68.32:80
+
+    ping                             
+
+    curl http://34.88.68.32/pingpong
+    Ping / Pongs: 0                                                                                       
+    curl http://34.88.68.32/pingpong
+    Ping / Pongs: 1
+    ```
+
 ## EX 2.07
 
 - Created new [service and stateful](./manifests/postgres.yaml) set for the postgres database

@@ -15,7 +15,8 @@ spec:
     spec:
       containers:
         - name: pingpong
-          image: hremonen/pingpong:2.07_4
+          image: hremonen/pingpong:3.01
+          imagePullPolicy: Always
           env:
             - name: POSTGRES_PASSWORD
               valueFrom:
