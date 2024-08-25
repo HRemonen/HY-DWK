@@ -1,6 +1,10 @@
 # Ping pong exercises
 
-## EX 3.91
+## EX 3.02
+
+- Update the service type from `LoadBalancer` to `NodePort`
+
+## EX 3.01
 
 - Created the GKE project as in the course material
 - Enabled container.googleapis.com

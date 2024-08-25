@@ -1,5 +1,28 @@
 # Log output exercises
 
+## EX 3.02
+
+- Updated the manifests
+- Needed to build new Docker image bc of GKE can not use ARM built images or w/e
+- Applied manifests
+- Checked that everything works
+    ```bash
+    k get ingress -n dwk-exercises
+
+    NAME                CLASS    HOSTS   ADDRESS       PORTS   AGE
+    logoutput-ingress   <none>   *       34.49.30.36   80      7m59s
+
+    curl http://34.49.30.36
+    file content: This text is from a file
+
+    MESSAGE: Hello, World!
+    2024-08-25T08:21:11.143Z: 1c2dbc67-8e55-4d5b-a677-10ae37f96003
+    Ping / Pongs: 45
+
+    curl http://34.49.30.36/pingpong
+    Ping / Pongs: 46
+    ```
+
 ## EX 2.06
 
 - Created a new manifest [configmap](./manifests/configmap.yaml)

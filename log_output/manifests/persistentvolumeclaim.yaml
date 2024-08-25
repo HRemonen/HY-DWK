@@ -4,7 +4,6 @@ metadata:
   namespace: dwk-exercises
   name: logoutput-claim
 spec:
-  storageClassName: manual
   accessModes:
     - ReadWriteOnce
   resources:

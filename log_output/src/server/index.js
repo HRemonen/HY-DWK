@@ -24,7 +24,7 @@ app.get('/', async (req, res) => {
 
   res.write(hash + '\n')
 
-  const pingpong = await axios.get('http://pingpong-svc:2345/pingpong') .then(response => response.data)
+  const pingpong = await axios.get('http://pingpong-svc:80/pingpong') .then(response => response.data)
     .catch(err => res.status(500).send(err.message)
   )
   

@@ -15,7 +15,8 @@ spec:
     spec:
       containers:
         - name: logoutput
-          image: hremonen/logoutput:2.06_2
+          image: hremonen/logoutput:3.02
+          imagePullPolicy: Always
           envFrom:
             - configMapRef:
                 name: logoutput-configmap
@@ -25,7 +26,8 @@ spec:
             - name: config-volume
               mountPath: /usr/src/app/config
         - name: logoutput-generator
-          image: hremonen/logoutput-generator:2.01_1
+          image: hremonen/logoutput-generator:3.02
+          imagePullPolicy: Always
           volumeMounts:
             - name: logoutput-vol
               mountPath: /usr/src/app/logs
