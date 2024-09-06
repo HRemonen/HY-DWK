@@ -3,7 +3,7 @@ name: Release DWK project
 on:
   push:
     paths:
-      - 'project*'
+      - 'project/**'
       - '.github/workflows/project-deployment.yaml'
 
 env:
