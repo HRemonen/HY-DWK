@@ -4,8 +4,6 @@ metadata:
   name: dwkproject-dep
   namespace: dwk-project
 spec:
-  strategy:
-    type: Recreate
   replicas: 1
   selector:
     matchLabels:
@@ -22,6 +20,7 @@ spec:
       containers:
         - name: dwkproject
           image: FRONTEND_IMAGE
+          imagePullPolicy: Always
           volumeMounts:
             - name: dwkproject-vol
               mountPath: /usr/src/app/files
