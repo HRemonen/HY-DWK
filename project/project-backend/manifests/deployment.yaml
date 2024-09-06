@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: dwkproject-backend
-          image: hremonen/dwkproject-backend:2.10
+          image: BACKEND_IMAGE
           imagePullPolicy: Always
           env:
             - name: POSTGRES_PASSWORD

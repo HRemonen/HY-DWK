@@ -1,5 +1,5 @@
 # Use an official Alpine runtime as a parent image
-FROM alpine:3.12
+FROM --platform=linux/amd64 alpine:3.12
 
 # Install curl and bash
 RUN apk add --no-cache curl bash

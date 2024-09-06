@@ -4,7 +4,6 @@ metadata:
   name: dwkproject-claim
   namespace: dwk-project
 spec:
-  storageClassName: manual
   accessModes:
     - ReadWriteOnce
   resources:

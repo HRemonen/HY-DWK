@@ -45,13 +45,13 @@ spec:
           volumeMounts:
             - name: project-db-data
               mountPath: /var/lib/postgresql/data
+              subPath: project-db
 
   volumeClaimTemplates:
     - metadata:
         name: project-db-data
       spec:
         accessModes: ["ReadWriteOnce"]
-        storageClassName: local-path
         resources:
           requests:
             storage: 100Mi

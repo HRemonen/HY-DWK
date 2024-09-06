@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: dwkproject-ingress
+  namespace: dwk-project
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /todos
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: dwkproject-backend-svc
+                port:
+                  number: 2345
+          - path: /
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: dwkproject-svc
+                port:
+                  number: 2345

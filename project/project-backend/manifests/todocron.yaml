@@ -11,6 +11,6 @@ spec:
         spec:
           containers:
             - name: create-todo
-              image: hremonen/create-todo:latest
+              image: CRONJOB_IMAGE
               imagePullPolicy: Always
           restartPolicy: OnFailure

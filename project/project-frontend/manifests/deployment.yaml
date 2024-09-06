@@ -19,7 +19,7 @@ spec:
             claimName: dwkproject-claim
       containers:
         - name: dwkproject
-          image: hremonen/dwkproject:2.02_16
+          image: FRONTEND_IMAGE
           volumeMounts:
             - name: dwkproject-vol
               mountPath: /usr/src/app/files
