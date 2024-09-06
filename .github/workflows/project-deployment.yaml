@@ -45,24 +45,24 @@ jobs:
 
       - name: Build Project Images
         run: |-
-          docker build --tag "gcr.io/$PROJECT_ID-frontend:$BRANCH-$GITHUB_SHA" ./project-frontend
-          docker build --tag "gcr.io/$PROJECT_ID-backend:$BRANCH-$GITHUB_SHA" ./project-backend
-          docker build --tag "gcr.io/$PROJECT_ID-cron:$BRANCH-$GITHUB_SHA" ./project-cron
+          docker build --tag "gcr.io/$PROJECT_ID/frontend:$BRANCH-$GITHUB_SHA" ./project-frontend
+          docker build --tag "gcr.io/$PROJECT_ID/backend:$BRANCH-$GITHUB_SHA" ./project-backend
+          docker build --tag "gcr.io/$PROJECT_ID/cron:$BRANCH-$GITHUB_SHA" ./project-cron
 
       - name: Publish
         run: |-
-          docker push "gcr.io/$PROJECT_ID-frontend:$BRANCH-$GITHUB_SHA"
-          docker push "gcr.io/$PROJECT_ID-backend:$BRANCH-$GITHUB_SHA"
-          docker push "gcr.io/$PROJECT_ID-cron:$BRANCH-$GITHUB_SHA"
+          docker push "gcr.io/$PROJECT_ID/frontend:$BRANCH-$GITHUB_SHA"
+          docker push "gcr.io/$PROJECT_ID/backend:$BRANCH-$GITHUB_SHA"
+          docker push "gcr.io/$PROJECT_ID/cron:$BRANCH-$GITHUB_SHA"
 
       - name: Set up Kustomize
         uses: imranismail/setup-kustomize@v2
 
       - name: Deploy
         run: |-
-          kustomize edit set image FRONTEND_IMAGE=gcr.io/$PROJECT_ID-frontend:$BRANCH-$GITHUB_SHA
-          kustomize edit set image BACKEND_IMAGE=gcr.io/$PROJECT_ID-backend:$BRANCH-$GITHUB_SHA
-          kustomize edit set image CRONJOB_IMAGE=gcr.io/$PROJECT_ID-cron:$BRANCH-$GITHUB_SHA
+          kustomize edit set image FRONTEND_IMAGE=gcr.io/$PROJECT_ID/frontend:$BRANCH-$GITHUB_SHA
+          kustomize edit set image BACKEND_IMAGE=gcr.io/$PROJECT_ID/backend:$BRANCH-$GITHUB_SHA
+          kustomize edit set image CRONJOB_IMAGE=gcr.io/$PROJECT_ID/cron:$BRANCH-$GITHUB_SHA
           kustomize build . | kubectl apply -f -
           kubectl rollout status deployment $SERVICE
           kubectl get services -o wide
