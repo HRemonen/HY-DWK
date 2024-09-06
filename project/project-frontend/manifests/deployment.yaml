@@ -4,6 +4,8 @@ metadata:
   name: dwkproject-dep
   namespace: dwk-project
 spec:
+  strategy:
+    type: Recreate
   replicas: 1
   selector:
     matchLabels:
@@ -24,5 +26,5 @@ spec:
             - name: dwkproject-vol
               mountPath: /usr/src/app/files
           env:
-           - name: PORT
-             value: "8080"
+            - name: PORT
+              value: "8080"
