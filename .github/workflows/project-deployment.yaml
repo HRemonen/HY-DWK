@@ -44,15 +44,15 @@ jobs:
 
       - name: Build Project Images
         run: |-
-          docker build --tag "gcr.io/$PROJECT_ID/frontend:$IMAGE:$BRANCH-$GITHUB_SHA" ./project-frontend
-          docker build --tag "gcr.io/$PROJECT_ID/backend:$IMAGE:$BRANCH-$GITHUB_SHA" ./project-backend
-          docker build --tag "gcr.io/$PROJECT_ID/cronjob:$IMAGE:$BRANCH-$GITHUB_SHA" ./project-cron
+          docker build --tag "gcr.io/$PROJECT_ID/$IMAGE-frontend:$BRANCH-$GITHUB_SHA" ./project-frontend
+          docker build --tag "gcr.io/$PROJECT_ID/$IMAGE-backend:$BRANCH-$GITHUB_SHA" ./project-backend
+          docker build --tag "gcr.io/$PROJECT_ID/$IMAGE-cron:$BRANCH-$GITHUB_SHA" ./project-cron
 
       - name: Publish
         run: |-
-          docker push "gcr.io/$PROJECT_ID/frontend:$IMAGE:$BRANCH-$GITHUB_SHA"
-          docker push "gcr.io/$PROJECT_ID/backend:$IMAGE:$BRANCH-$GITHUB_SHA"
-          docker push "gcr.io/$PROJECT_ID/cronjob:$IMAGE:$BRANCH-$GITHUB_SHA"
+          docker push "gcr.io/$PROJECT_ID/$IMAGE-frontend:$BRANCH-$GITHUB_SHA"
+          docker push "gcr.io/$PROJECT_ID/$IMAGE-backend:$BRANCH-$GITHUB_SHA"
+          docker push "gcr.io/$PROJECT_ID/$IMAGE-cron:$BRANCH-$GITHUB_SHA"
 
       - name: Set up Kustomize
         uses: imranismail/setup-kustomize@v2
