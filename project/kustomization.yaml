@@ -4,7 +4,7 @@ kind: Kustomization
 resources:
 - project-backend/manifests/deployment.yaml
 - project-backend/manifests/postgres.yaml
-- project-backend/manifests/secret.yaml
+- project-backend/manifests/sealed-secret.yaml
 - project-backend/manifests/service.yaml
 - project-backend/manifests/todocron.yaml
 - project-frontend/manifests/deployment.yaml
