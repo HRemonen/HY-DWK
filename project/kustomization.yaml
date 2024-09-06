@@ -3,21 +3,21 @@ kind: Kustomization
 namespace: dwk-project
 
 resources:
-- ./namespace.yaml
-- project-backend/manifests/deployment.yaml
-- project-backend/manifests/postgres.yaml
-- project-backend/manifests/sealed-secret.yaml
-- project-backend/manifests/service.yaml
-- project-backend/manifests/todocron.yaml
-- project-frontend/manifests/deployment.yaml
-- project-frontend/manifests/ingress.yaml
-- project-frontend/manifests/persistentVolumeClaim.yaml
-- project-frontend/manifests/service.yaml
+  - ./namespace.yaml
+  - project-backend/manifests/deployment.yaml
+  - project-backend/manifests/postgres.yaml
+  - project-backend/manifests/sealed-secret.yaml
+  - project-backend/manifests/service.yaml
+  - project-backend/manifests/todocron.yaml
+  - project-frontend/manifests/deployment.yaml
+  - project-frontend/manifests/ingress.yaml
+  - project-frontend/manifests/persistentVolumeClaim.yaml
+  - project-frontend/manifests/service.yaml
 
 images:
-- name: FRONTEND_IMAGE
-  newName: hremonen/dwkproject-frontend:3.03
-- name: BACKEND_IMAGE
-  newName: hremonen/dwkproject-backend:3.03
-- name: CRONJOB_IMAGE
-  newName: hremonen/dwkproject-cron:3.03
+  - name: FRONTEND_IMAGE
+    newName: hremonen/dwkproject-frontend:3.03
+  - name: BACKEND_IMAGE
+    newName: hremonen/dwkproject-backend:3.03
+  - name: CRONJOB_IMAGE
+    newName: hremonen/dwkproject-cron:3.03
