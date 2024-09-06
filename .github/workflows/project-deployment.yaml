@@ -3,8 +3,8 @@ name: Release DWK project
 on:
   push:
     paths:
-      - 'project/**'
-      - '.github/workflows/project-deployment.yaml'
+      - "project/**"
+      - ".github/workflows/project-deployment.yaml"
 
 env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
@@ -23,46 +23,46 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-    
+
       - uses: google-github-actions/auth@v2
         with:
-          credentials_json: '${{ secrets.GKE_SA_KEY }}'
-    
-      - name: 'Set up Cloud SDK'
+          credentials_json: "${{ secrets.GKE_SA_KEY }}"
+
+      - name: "Set up Cloud SDK"
         uses: google-github-actions/setup-gcloud@v2
-    
-      - name: 'Use gcloud CLI'
+
+      - name: "Use gcloud CLI"
         run: gcloud info
 
       - run: gcloud --quiet auth configure-docker
 
-      - name: 'Get GKE credentials'
-        uses: 'google-github-actions/get-gke-credentials@v2'
+      - name: "Get GKE credentials"
+        uses: "google-github-actions/get-gke-credentials@v2"
         with:
-          cluster_name: '${{ env.GKE_CLUSTER }}'
-          project_id: '${{ env.PROJECT_ID }}'
-          location: '${{ env.GKE_ZONE }}'
+          cluster_name: "${{ env.GKE_CLUSTER }}"
+          project_id: "${{ env.PROJECT_ID }}"
+          location: "${{ env.GKE_ZONE }}"
 
       - name: Build Project Images
         run: |-
-          docker build --tag "gcr.io/$PROJECT_ID/frontend:$BRANCH-$GITHUB_SHA" ./project-frontend
-          docker build --tag "gcr.io/$PROJECT_ID/backend:$BRANCH-$GITHUB_SHA" ./project-backend
-          docker build --tag "gcr.io/$PROJECT_ID/cron:$BRANCH-$GITHUB_SHA" ./project-cron
+          docker build --tag "gcr.io/$PROJECT_ID/project-frontend:$BRANCH-$GITHUB_SHA" ./project-frontend
+          docker build --tag "gcr.io/$PROJECT_ID/project-backend:$BRANCH-$GITHUB_SHA" ./project-backend
+          docker build --tag "gcr.io/$PROJECT_ID/project-cron:$BRANCH-$GITHUB_SHA" ./project-cron
 
       - name: Publish
         run: |-
-          docker push "gcr.io/$PROJECT_ID/frontend:$BRANCH-$GITHUB_SHA"
-          docker push "gcr.io/$PROJECT_ID/backend:$BRANCH-$GITHUB_SHA"
-          docker push "gcr.io/$PROJECT_ID/cron:$BRANCH-$GITHUB_SHA"
+          docker push "gcr.io/$PROJECT_ID/project-frontend:$BRANCH-$GITHUB_SHA"
+          docker push "gcr.io/$PROJECT_ID/project-backend:$BRANCH-$GITHUB_SHA"
+          docker push "gcr.io/$PROJECT_ID/project-cron:$BRANCH-$GITHUB_SHA"
 
       - name: Set up Kustomize
         uses: imranismail/setup-kustomize@v2
 
       - name: Deploy
         run: |-
-          kustomize edit set image FRONTEND_IMAGE=gcr.io/$PROJECT_ID/frontend:$BRANCH-$GITHUB_SHA
-          kustomize edit set image BACKEND_IMAGE=gcr.io/$PROJECT_ID/backend:$BRANCH-$GITHUB_SHA
-          kustomize edit set image CRONJOB_IMAGE=gcr.io/$PROJECT_ID/cron:$BRANCH-$GITHUB_SHA
+          kustomize edit set image FRONTEND_IMAGE=gcr.io/$PROJECT_ID/project-frontend:$BRANCH-$GITHUB_SHA
+          kustomize edit set image BACKEND_IMAGE=gcr.io/$PROJECT_ID/project-backend:$BRANCH-$GITHUB_SHA
+          kustomize edit set image CRONJOB_IMAGE=gcr.io/$PROJECT_ID/project-cron:$BRANCH-$GITHUB_SHA
           kustomize build . | kubectl apply -f -
           kubectl rollout status deployment $SERVICE
           kubectl get services -o wide
