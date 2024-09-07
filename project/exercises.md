@@ -1,5 +1,9 @@
 # Project exercises
 
+## EX 3.04
+
+- Updated the deployment
+
 ## EX 3.03
 
 - Updated each project Dockerfile to use specific architecture so that it's compatible with GKE.
