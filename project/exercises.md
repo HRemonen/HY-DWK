@@ -1,5 +1,10 @@
 # Project exercises
 
+## EX 3.05
+
+- Created delete-deployment workflow file
+- Removed branch e304. See [workflow job summary](https://github.com/HRemonen/HY-DWK/actions/runs/10751890026/job/29819605966)
+
 ## EX 3.04
 
 - Updated the deployment
