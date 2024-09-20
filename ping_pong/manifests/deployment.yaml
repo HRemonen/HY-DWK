@@ -17,6 +17,10 @@ spec:
         - name: pingpong
           image: hremonen/pingpong:3.01
           imagePullPolicy: Always
+          resources:
+            limits:
+              cpu: 100m
+              memory: 250Mi
           env:
             - name: POSTGRES_PASSWORD
               valueFrom:

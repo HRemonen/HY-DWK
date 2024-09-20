@@ -21,6 +21,10 @@ spec:
         - name: dwkproject
           image: FRONTEND_IMAGE
           imagePullPolicy: Always
+          resources:
+            limits:
+              cpu: 100m
+              memory: 250Mi
           volumeMounts:
             - name: dwkproject-vol
               mountPath: /usr/src/app/files

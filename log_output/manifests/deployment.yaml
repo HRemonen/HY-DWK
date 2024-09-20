@@ -17,6 +17,10 @@ spec:
         - name: logoutput
           image: hremonen/logoutput:3.02
           imagePullPolicy: Always
+          resources:
+            limits:
+              cpu: 100m
+              memory: 250Mi
           envFrom:
             - configMapRef:
                 name: logoutput-configmap
@@ -28,6 +32,10 @@ spec:
         - name: logoutput-generator
           image: hremonen/logoutput-generator:3.02
           imagePullPolicy: Always
+          resources:
+            limits:
+              cpu: 100m
+              memory: 250Mi
           volumeMounts:
             - name: logoutput-vol
               mountPath: /usr/src/app/logs

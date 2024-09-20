@@ -17,6 +17,10 @@ spec:
         - name: dwkproject-backend
           image: BACKEND_IMAGE
           imagePullPolicy: Always
+          resources:
+            limits:
+              cpu: 100m
+              memory: 250Mi
           env:
             - name: POSTGRES_PASSWORD
               valueFrom:
