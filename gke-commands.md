@@ -2,15 +2,27 @@
 
 ## Clusters
 
-Create cluster
+Create local cluster
+```bash
+k3d cluster create --port 8082:30080@agent:0 -p 8081:80@loadbalancer --agents 2
+```
+
+Remove local cluster
+```bash
+k3d cluster delete
+```
+
+Create GKE cluster
 ```bash
 gcloud container clusters create dwk-cluster --zone=europe-north1-b --cluster-version=1.29
 ```
 
-Delete cluster
+Delete GKE cluster
 ```bash
 gcloud container clusters delete dwk-cluster --zone=europe-north1-b
 ```
+
+## Controllers
 
 Add sealed-secrets controller
 ```bash
