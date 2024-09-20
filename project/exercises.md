@@ -1,5 +1,9 @@
 # Project exercises
 
+## EX 3.06
+
+- Check out [this post](https://www.hremonen.com/blog/dbaas-vs-self-hosted-database-solutions) I wrote about it.
+
 ## EX 3.05
 
 - Created delete-deployment workflow file
