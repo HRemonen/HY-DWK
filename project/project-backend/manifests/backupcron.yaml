@@ -1,0 +1,25 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: backup-cron
+  namespace: dwk-project
+spec:
+  schedule: "* * * * *"
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: create-backup
+              image: BACKUP_IMAGE
+              imagePullPolicy: Always
+              env:
+                - name: PG_PASSWORD
+                  valueFrom:
+                    secretKeyRef:
+                      name: project-db-secret
+                      key: POSTGRES_PASSWORD
+                - name: URL
+                  value: "postgres://postgres:$PG_PASSWORD@project-db:5432/postgres"
+          restartPolicy: Never
