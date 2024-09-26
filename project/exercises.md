@@ -1,5 +1,13 @@
 # Project exercises
 
+## EX 3.10
+
+- Picture of the logs ![](./logs.png "GKE Logs")
+
+## EX 3.07 - 3.09
+
+- Check commits
+
 ## EX 3.06
 
 - Check out [this post](https://www.hremonen.com/blog/dbaas-vs-self-hosted-database-solutions) I wrote about it.
