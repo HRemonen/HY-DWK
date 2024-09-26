@@ -9,7 +9,6 @@ resources:
   - project-backend/manifests/sealed-secret.yaml
   - project-backend/manifests/service.yaml
   - project-backend/manifests/todocron.yaml
-  - project-backend/manifests/backupcron.yaml
   - project-frontend/manifests/deployment.yaml
   - project-frontend/manifests/ingress.yaml
   - project-frontend/manifests/persistentVolumeClaim.yaml
@@ -22,5 +21,3 @@ images:
     newName: hremonen/dwkproject-backend:3.03
   - name: CRONJOB_IMAGE
     newName: hremonen/dwkproject-cron:3.03
-  - name: BACKUP_IMAGE
-    newName: hremonen/dwkproject-backup-cron:3.07
