@@ -15,12 +15,18 @@ spec:
     spec:
       containers:
         - name: pingpong
-          image: hremonen/pingpong:3.01
+          image: hremonen/pingpong:4.01
           imagePullPolicy: Always
+          readinessProbe:
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            httpGet:
+              path: /health
+              port: 3000
           resources:
             limits:
-              cpu: 100m
-              memory: 250Mi
+              cpu: 1000m
+              memory: 1Gi
           env:
             - name: POSTGRES_PASSWORD
               valueFrom:

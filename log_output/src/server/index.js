@@ -12,6 +12,14 @@ const configDir = path.join('/', 'usr', 'src', 'app', 'config')
 const statusPath = path.join(logsDir, 'status.txt')
 const informationPath = path.join(configDir, 'information.txt')
 
+app.get('/health', async (req, res) => {
+  await axios.get('http://pingpong-svc:80/health')
+    .then(response => res.status(200).send(response.data))
+    .catch(err => res.status(500).send(err.message)
+  )
+})
+
+
 app.get('/', async (req, res) => {
   const information = fs.readFileSync(informationPath, 'utf8')
   if (!information) res.status(404).send('No config information found')
@@ -24,7 +32,8 @@ app.get('/', async (req, res) => {
 
   res.write(hash + '\n')
 
-  const pingpong = await axios.get('http://pingpong-svc:80/pingpong') .then(response => response.data)
+  const pingpong = await axios.get('http://pingpong-svc:80/pingpong')
+    .then(response => response.data)
     .catch(err => res.status(500).send(err.message)
   )
   

@@ -4,20 +4,21 @@ metadata:
   name: logoutput-ingress
   namespace: dwk-exercises
 spec:
+  ingressClassName: nginx
   rules:
-  - http:
-      paths:
-      - path: /
-        pathType: ImplementationSpecific
-        backend:
-          service:
-            name: logoutput-svc
-            port:
-              number: 80
-      - path: /pingpong
-        pathType: ImplementationSpecific
-        backend:
-          service:
-            name: pingpong-svc
-            port:
-              number: 80
+    - http:
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: logoutput-svc
+                port:
+                  number: 80
+          - path: /pingpong
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: pingpong-svc
+                port:
+                  number: 80

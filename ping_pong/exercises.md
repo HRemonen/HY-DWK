@@ -1,5 +1,28 @@
 # Ping pong exercises
 
+## EX 4.01
+
+- Added the ReadinesProbes to the deployment
+- Made same changes to the log_output app
+- Created namespace `dwk-exercises` to the cluster
+- Checked that everything works
+    ```bash
+    k get po -n dwk-exercises         
+    NAME                            READY   STATUS    RESTARTS   AGE
+    logoutput-dep-97b8fdfff-grr78   1/2     Running   0          29s
+    pingpong-dep-765b69f645-m4fxc   0/1     Running   0          20s
+
+    k apply -f manifests/postgres.yaml
+    service/postgres-svc unchanged
+    statefulset.apps/postgres-stset created
+
+    k get po -n dwk-exercises
+    NAME                            READY   STATUS    RESTARTS   AGE
+    logoutput-dep-97b8fdfff-grr78   2/2     Running   0          73s
+    pingpong-dep-765b69f645-m4fxc   1/1     Running   0          64s
+    postgres-stset-0                1/1     Running   0          13s
+    ```
+
 ## EX 3.02
 
 - Update the service type from `LoadBalancer` to `NodePort`
