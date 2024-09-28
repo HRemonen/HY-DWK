@@ -1,7 +1,7 @@
 import "express-async-errors";
 import express from "express";
 import cors from "cors";
-import { connectToDatabase } from "./database/connection.js";
+import { connectToDatabase, sequelize } from "./database/connection.js";
 import seedTodos from "./database/seeders/todos.js";
 import Todo from "./database/models/Todo.js";
 import errorHandler from "./middleware/error.js";
@@ -18,6 +18,18 @@ app.use(express.urlencoded({ extended: true }));
 app.get("/", (req, res) => {
   res.send("Ping backend");
 });
+
+app.get("/health", async (req, res) => {
+  try {
+    await sequelize.authenticate();
+  } catch (err) {
+    logger.error("Database connection failed", { error: err.stack });
+
+    return res.status(500).json({ status: "error", message: "Database connection failed" });
+  }
+
+  res.status(200).json({ status: "success", message: "Database connection established" });
+})
 
 app.get("/todos", async (req, res) => {
   const todos = await Todo.findAll();

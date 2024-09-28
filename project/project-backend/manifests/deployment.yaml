@@ -17,6 +17,18 @@ spec:
         - name: dwkproject-backend
           image: BACKEND_IMAGE
           imagePullPolicy: Always
+          readinessProbe:
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            httpGet:
+              path: /health
+              port: 8000
+          livenessProbe:
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            httpGet:
+              path: /health
+              port: 8000
           resources:
             limits:
               cpu: 1000m

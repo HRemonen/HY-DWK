@@ -1,5 +1,23 @@
 # Project exercises
 
+## EX 4.02
+
+- Created /health endpoint for the readiness and liveness probes.
+- Added the probes to the deployment
+- Built new image hremonen/dwkproject-backend:4.02 which works
+- Built another image hremonen/dwkproject-backend:nodb which has wrong db crendentials
+- Deployed the working application
+- Updated the dwkproject-backend image to the one which breaks the application
+- Checked that everything is working regardless
+    ```bash
+    k get po -n dwk-project
+    NAME                                      READY   STATUS    RESTARTS     AGE
+    dwkproject-backend-dep-79d5fb645c-4kpqp   1/1     Running   0            4m33s
+    dwkproject-backend-dep-7cb6fbcd4b-w6tp6   0/1     Running   1 (3s ago)   29s
+    dwkproject-dep-67b6c6b6f5-t7zxd           1/1     Running   0            4m33s
+    project-db-stset-0                        1/1     Running   0  
+    ```
+
 ## EX 3.10
 
 - Picture of the logs ![](./logs.png "GKE Logs")
