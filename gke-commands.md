@@ -22,6 +22,18 @@ Delete GKE cluster
 gcloud container clusters delete dwk-cluster --zone=europe-north1-b
 ```
 
+## Prometheus
+
+Create new namespace for Prometheus
+```bash
+kubectl create namespace prometheus
+```
+
+Install ``kube-prometheus-stack``
+```bash
+helm install prometheus-community/kube-prometheus-stack --generate-name --namespace prometheus
+```
+
 ## Controllers
 
 Add sealed-secrets controller

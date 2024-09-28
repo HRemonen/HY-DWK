@@ -1,5 +1,13 @@
 # Project exercises
 
+## EX 4.03
+
+- Installed the prometheus following part 2 instructions
+- Queried with the following query
+    ```query
+    sum(kube_pod_info{namespace="prometheus", created_by_kind="StatefulSet"})
+    ```
+
 ## EX 4.02
 
 - Created /health endpoint for the readiness and liveness probes.
