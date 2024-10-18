@@ -1,0 +1,49 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: dwkproject-backend-dep
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dwkproject-backend
+  strategy:
+    canary:
+      steps:
+      - setWeight: 25
+      - pause:
+          duration: 30s
+      - setWeight: 50
+      - pause:
+          duration: 30s
+  template:
+    metadata:
+      labels:
+        app: dwkproject-backend
+    spec:
+       containers:
+        - name: dwkproject-backend
+          image: BACKEND_IMAGE
+          imagePullPolicy: Always
+          readinessProbe:
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            httpGet:
+              path: /health
+              port: 8000
+          livenessProbe:
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            httpGet:
+              path: /health
+              port: 8000
+          resources:
+            limits:
+              cpu: 1000m
+              memory: 1Gi
+          env:
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: project-db-secret
+                  key: POSTGRES_PASSWORD
