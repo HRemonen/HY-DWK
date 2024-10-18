@@ -10,18 +10,16 @@ spec:
   strategy:
     canary:
       steps:
-      - setWeight: 25
-      - pause:
-          duration: 30s
-      - setWeight: 50
-      - pause:
-          duration: 30s
+        - setWeight: 50
+        - analysis:
+            templates:
+              - templateName: cpu-usage
   template:
     metadata:
       labels:
         app: dwkproject-backend
     spec:
-       containers:
+      containers:
         - name: dwkproject-backend
           image: BACKEND_IMAGE
           imagePullPolicy: Always

@@ -1,5 +1,19 @@
 # Project exercises
 
+## EX 4.04
+
+- Apply the argo rollouts
+    ```bash
+    kubectl create namespace argo-rollouts
+    kubectl apply -n argo-rollouts -f https://github.com/argoproj/argo-rollouts/releases/latest/download/install.yaml
+    ```
+- Create resource for the [Analysis Template](./project-backend/manifests/analysistemplate.yaml)
+- Create resource for the [Rollout](./project-backend/manifests/rollout.yaml)
+- Remove the old `deployment.yaml`
+- Update the [kustomization.yaml](kustomization.yaml) to use the new rollout manifest instead of the old deployment
+- Set the successCondition to: result < 0.001 which basically means that it will fail always. --> confirm that the new pod is not deployed.
+- Set the successCondition to something more realistic and see that the new pod gets deployed.
+
 ## EX 4.03
 
 - Installed the prometheus following part 2 instructions

@@ -4,6 +4,7 @@ namespace: dwk-project
 
 resources:
   - ./namespace.yaml
+  - project-backend/manifests/analysistemplate.yaml
   - project-backend/manifests/rollout.yaml
   - project-backend/manifests/postgres.yaml
   - project-backend/manifests/sealed-secret.yaml
@@ -18,6 +19,6 @@ images:
   - name: FRONTEND_IMAGE
     newName: hremonen/dwkproject-frontend:3.03
   - name: BACKEND_IMAGE
-    newName: hremonen/dwkproject-backend:4.02
+    newName: hremonen/dwkproject-backend:4.04
   - name: CRONJOB_IMAGE
     newName: hremonen/dwkproject-cron:3.03
