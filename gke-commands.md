@@ -34,6 +34,12 @@ Install ``kube-prometheus-stack``
 helm install prometheus-community/kube-prometheus-stack --generate-name --namespace prometheus
 ```
 
+Port forward
+
+```bash
+kubectl -n prometheus port-forward <PROMETHEUS_POD_NAME> 9090:9090
+```
+
 ## Controllers
 
 Add sealed-secrets controller
