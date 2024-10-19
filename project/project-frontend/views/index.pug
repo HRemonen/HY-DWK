@@ -11,9 +11,13 @@ html
       input#todo-input(type='text', name="title" maxlength='140', required, placeholder='Enter your todo')
       button(type='submit') Send
 
-    //- List of todos
+    //- List of todos with checkboxes to toggle completion
     ul
       each todo in todos
-        li= todo.title
+        li
+          form(action=`/${todo.id}?_method=PUT`, method="POST", style="display: inline")
+            input(type="checkbox", name="completed", checked=todo.completed, onchange="this.form.submit()")
+          span(style=todo.completed ? 'text-decoration: line-through;' : '')= todo.title
+
 
 

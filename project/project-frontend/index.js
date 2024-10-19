@@ -5,6 +5,7 @@ import express from "express";
 import request from "request";
 import axios from "axios";
 import cors from "cors";
+import methodOverride from "method-override";
 
 dotenv.config();
 
@@ -49,9 +50,10 @@ setInterval(async () => {
 }, 60 * 60000);
 
 app.use(cors());
-
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("files"));
+app.use(methodOverride("_method"));
+
 app.set("views", "./views");
 app.set("view engine", "pug");
 
@@ -71,6 +73,20 @@ app.post("/", async (req, res) => {
     .post("http://dwkproject-backend-svc:2345/todos", { title })
     .then((response) => {
       console.log("Todo created: " + title);
+    })
+    .catch((err) => console.error(err));
+
+  res.redirect("/");
+});
+
+app.put("/:id", async (req, res) => {
+  console.log("Request method:", req.method);
+  const { id } = req.params;
+
+  await axios
+    .put(`http://dwkproject-backend-svc:2345/todos/${id}`)
+    .then((response) => {
+      console.log("Todo updated: " + id);
     })
     .catch((err) => console.error(err));
 

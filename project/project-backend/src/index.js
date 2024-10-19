@@ -1,10 +1,13 @@
 import "express-async-errors";
-import express from "express";
 import cors from "cors";
-import { connectToDatabase, sequelize } from "./database/connection.js";
-import seedTodos from "./database/seeders/todos.js";
+import express from "express";
+
 import Todo from "./database/models/Todo.js";
+import seedTodos from "./database/seeders/todos.js";
+import { connectToDatabase, sequelize } from "./database/connection.js";
+
 import errorHandler from "./middleware/error.js";
+
 import logger from "./utils/logger.js";
 import { validateTodo } from "./utils/validator.js";
 
@@ -21,20 +24,40 @@ app.get("/", (req, res) => {
 
 app.get("/health", async (req, res) => {
   try {
-    await sequelize.authenticate();
+    await sequelize.authenticate(); // This will spam the logs with "Executing (default): SELECT 1+1 AS result"
   } catch (err) {
     logger.error("Database connection failed", { error: err.stack });
 
-    return res.status(500).json({ status: "error", message: "Database connection failed" });
+    return res
+      .status(500)
+      .json({ status: "error", message: "Database connection failed" });
   }
 
-  res.status(200).json({ status: "success", message: "Database connection established" });
-})
+  res
+    .status(200)
+    .json({ status: "success", message: "Database connection established" });
+});
 
 app.get("/todos", async (req, res) => {
-  const todos = await Todo.findAll();
+  const todos = await Todo.findAll({ order: [["id", "ASC"]] });
 
   res.json({ status: "success", data: todos });
+});
+
+app.put("/todos/:id", async (req, res) => {
+  const { id } = req.params;
+  const todo = await Todo.findByPk(id);
+
+  if (!todo) {
+    return res.status(404).json({ status: "error", message: "Todo not found" });
+  }
+
+  todo.completed = !todo.completed;
+  await todo.save();
+
+  logger.info("Todo status updated", { id });
+
+  res.json({ status: "success", message: "Todo status updated" });
 });
 
 app.post("/todos", async (req, res) => {
@@ -45,9 +68,7 @@ app.post("/todos", async (req, res) => {
   if (validationErrors.length > 0) {
     logger.error("Validation failed", { errors: validationErrors });
 
-    return res
-      .status(400)
-      .json({ status: "error", data: validationErrors });
+    return res.status(400).json({ status: "error", data: validationErrors });
   }
 
   const { title } = todo;

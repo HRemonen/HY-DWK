@@ -17,8 +17,8 @@ resources:
 
 images:
   - name: FRONTEND_IMAGE
-    newName: hremonen/dwkproject-frontend:3.03
+    newName: hremonen/dwkproject-frontend:4.05
   - name: BACKEND_IMAGE
-    newName: hremonen/dwkproject-backend:4.04
+    newName: hremonen/dwkproject-backend:4.05
   - name: CRONJOB_IMAGE
     newName: hremonen/dwkproject-cron:3.03
