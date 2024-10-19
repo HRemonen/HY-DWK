@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dwkproject-broadcaster-dep
+  namespace: dwk-project
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: dwkproject-broadcaster
+  template:
+    metadata:
+      labels:
+        app: dwkproject-broadcaster
+    spec:
+      containers:
+        - name: dwkproject-broadcaster
+          image: BROADCASTER_IMAGE
+          imagePullPolicy: Always
+          resources:
+            limits:
+              cpu: 1000m
+              memory: 1Gi
+          env:
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
