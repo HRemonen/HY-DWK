@@ -1,6 +1,7 @@
 import "express-async-errors";
 import cors from "cors";
 import express from "express";
+import { connect, JSONCodec } from "nats";
 
 import Todo from "./database/models/Todo.js";
 import seedTodos from "./database/seeders/todos.js";
@@ -14,6 +15,11 @@ import { validateTodo } from "./utils/validator.js";
 const app = express();
 const PORT = 8000;
 
+const nc = await connect({
+  servers: "nats://my-nats.default.svc.cluster.local:4222",
+});
+const jc = JSONCodec();
+
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -24,7 +30,7 @@ app.get("/", (req, res) => {
 
 app.get("/health", async (req, res) => {
   try {
-    await sequelize.authenticate(); // This will spam the logs with "Executing (default): SELECT 1+1 AS result"
+    await sequelize.authenticate({ logging: false }); // This will spam the logs with "Executing (default): SELECT 1+1 AS result"
   } catch (err) {
     logger.error("Database connection failed", { error: err.stack });
 
@@ -53,9 +59,15 @@ app.put("/todos/:id", async (req, res) => {
   }
 
   todo.completed = !todo.completed;
-  await todo.save();
+  const updatedTodo = await todo.save();
+
+  const msg = {
+    reason: "updated",
+    data: updatedTodo,
+  }
 
   logger.info("Todo status updated", { id });
+  nc.publish("todos", jc.encode(msg));
 
   res.json({ status: "success", message: "Todo status updated" });
 });
@@ -73,9 +85,15 @@ app.post("/todos", async (req, res) => {
 
   const { title } = todo;
 
-  await Todo.create({ title });
+  const newTodo = await Todo.create({ title });
+
+  const msg = {
+    reason: "created",
+    data: newTodo,
+  }
 
   logger.info("Todo created", { title });
+  nc.publish("todos", jc.encode(msg));
 
   res.status(201).json({ status: "success", message: "Todo created" });
 });

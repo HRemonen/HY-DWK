@@ -3,7 +3,7 @@ kind: Rollout
 metadata:
   name: dwkproject-backend-dep
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       app: dwkproject-backend
@@ -43,5 +43,5 @@ spec:
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: project-db-secret
+                  name: project-secret
                   key: POSTGRES_PASSWORD
