@@ -4,7 +4,7 @@ metadata:
   name: dwkproject-broadcaster-dep
   namespace: dwk-project
 spec:
-  replicas: 5
+  replicas: 1
   selector:
     matchLabels:
       app: dwkproject-broadcaster
@@ -26,3 +26,8 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.name
+            - name: TELEGRAM_BOT_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: project-secret
+                  key: TELEGRAM_BOT_TOKEN

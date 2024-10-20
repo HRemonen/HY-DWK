@@ -1,5 +1,40 @@
 # Project exercises
 
+## EX 4.06
+
+- Installed NATS from the Heml charts following the instructions
+- Create the configuration file for the NATS values
+- Expose NATS web service
+    ```bash
+    kubectl port-forward my-nats-0 8222:8222
+    ```
+- Expose the Prometheus exporter
+    ```bash
+    kubectl port-forward --namespace default svc/my-nats-metrics 7777:7777
+    ```
+- Add the service monitor label
+    ```bash
+    k label servicemonitors.monitoring.coreos.com -n prometheus my-nats-metrics release=kube-prometheus-stack-1727515848
+    ```
+- Confirm that NATS metrics ServiceMonitor is among the list of targets in Prometheus (localhost:9090/targets?search=)
+    ```bash
+    curl http://localhost:9090/api/v1/query\?query\=gnatsd_connz_in_msgs
+
+    {"status":"success","data":{"resultType":"vector","result":[{"metric":{"__name__":"gnatsd_connz_in_msgs","container":"metrics","endpoint":"tcp-metrics","instance":"10.42.1.96:7777","job":"my-nats-metrics","namespace":"default","pod":"my-nats-0","server_id":"http://localhost:8222","service":"my-nats-metrics"},"value":[1729329366.771,"0"]}]}}                                                                                        
+    ```
+- Setup Grafana dashboard
+    ```bash
+    kubectl -n prometheus port-forward kube-prometheus-stack-1727515848-grafana-74ccdcc85c-vx6nb 3000
+    ```
+- Login to the Grafana dash with u: admin p: prom-operator and import the dashboard from https://raw.githubusercontent.com/nats-io/prometheus-nats-exporter/5084a32850823b59069f21f3a7dde7e488fef1c6/walkthrough/grafana-nats-dash.json
+- Create Project Broadcaster directory
+- Setup telegram bot integration
+- Test that everything is working, especially when scaled to multiple broadcasters
+
+## EX 4.05
+
+- Updated the project frontend and project backend
+
 ## EX 4.04
 
 - Apply the argo rollouts
@@ -97,7 +132,7 @@
         apiVersion: v1
         kind: Secret
         metadata:
-            name: project-db-secret
+            name: project-secret
             namespace: dwk-project
         data:
             POSTGRES_PASSWORD: <INSERT PASSWORD OF CHOICE>
