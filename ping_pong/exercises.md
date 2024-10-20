@@ -1,5 +1,11 @@
 # Ping pong exercises
 
+## EX 4.07
+
+- Added sealed secrets for the Ping Pong app
+- Created Kustomize to be used to deploy the manifests more easily
+- Created the app in to ArgoCD as seen on [the summary](./argo_deployment.png)
+
 ## EX 4.01
 
 - Added the ReadinesProbes to the deployment
