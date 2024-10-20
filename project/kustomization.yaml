@@ -3,7 +3,6 @@ kind: Kustomization
 namespace: dwk-project
 
 resources:
-  - ./namespace.yaml
   - project-backend/manifests/analysistemplate.yaml
   - project-backend/manifests/rollout.yaml
   - project-backend/manifests/postgres.yaml
