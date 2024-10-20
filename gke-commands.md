@@ -40,6 +40,15 @@ Port forward
 kubectl -n prometheus port-forward <PROMETHEUS_POD_NAME> 9090:9090
 ```
 
+## ArgoCD
+
+Install ArgoCD
+
+```bash
+kubectl create namespace argocd
+kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+```
+
 ## Controllers
 
 Add sealed-secrets controller

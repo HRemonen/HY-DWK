@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: pingpong
-          image: hremonen/pingpong:4.01
+          image: PING_PONG_IMAGE
           imagePullPolicy: Always
           readinessProbe:
             initialDelaySeconds: 10
