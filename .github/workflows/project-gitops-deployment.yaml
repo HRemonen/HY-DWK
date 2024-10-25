@@ -44,8 +44,6 @@ jobs:
 
       - name: Generate Kustomization
         run: |-
-          kubectl create namespace dwk-project || true
-          kubectl config set-context --current --namespace=dwk-project
           kustomize edit set namespace dwk-project
           kustomize edit set image FRONTEND_IMAGE=hremonen/dwkproject-frontend:$GITHUB_SHA
           kustomize edit set image BACKEND_IMAGE=hremonen/dwkproject-backend:$GITHUB_SHA
