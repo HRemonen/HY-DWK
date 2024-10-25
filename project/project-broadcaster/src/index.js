@@ -2,6 +2,7 @@ import { connect, JSONCodec } from "nats";
 import TelegramBot from "node-telegram-bot-api";
 import logger from "./utils/logger.js";
 
+const IN_PRODUCTION = process.env.PRODUCTION === "true";
 const POD_NAME = process.env.POD_NAME || "unknown";
 const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
 const TELEGRAM_CHAT_ID = "-4561805519";
@@ -32,7 +33,11 @@ for await (const m of sub) {
   const broadcasterMsg = `Broadcasted from <b>${POD_NAME}</b>`;
   const finalMessage = `${titleMsg}\n\n${formattedMsg}\n\n${broadcasterMsg}`;
 
-  bot.sendMessage(TELEGRAM_CHAT_ID, finalMessage, { parse_mode: "HTML" });
+  if (IN_PRODUCTION) {
+    bot.sendMessage(TELEGRAM_CHAT_ID, finalMessage, { parse_mode: "HTML" });
+  } else {
+    logger.info(`NOT SENDING IN NON-PRODUCTION: ${finalMessage}`);
+  }
 }
 
 await nc.close();
