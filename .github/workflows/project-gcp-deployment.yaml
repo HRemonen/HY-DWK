@@ -1,10 +1,6 @@
 name: Release DWK project
 
-on:
-  push:
-    paths:
-      - "project/**"
-      - ".github/workflows/project-deployment.yaml"
+on: workflow_dispatch
 
 env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
