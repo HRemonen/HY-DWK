@@ -1,6 +1,6 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-namespace: dwk-project
+namespace: dwk-project-staging
 
 resources:
 - project-backend/manifests/analysistemplate.yaml
@@ -18,13 +18,13 @@ resources:
 images:
 - name: BACKEND_IMAGE
   newName: hremonen/dwkproject-backend
-  newTag: f8b0bc1cc940b583cba5ce4f38d8fb5cb58673ba
+  newTag: 0498077ceb558f05fcd9b798c5444cc08afcd921
 - name: BROADCASTER_IMAGE
   newName: hremonen/dwkproject-broadcaster
-  newTag: f8b0bc1cc940b583cba5ce4f38d8fb5cb58673ba
+  newTag: 0498077ceb558f05fcd9b798c5444cc08afcd921
 - name: CRONJOB_IMAGE
   newName: hremonen/dwkproject-cron
-  newTag: f8b0bc1cc940b583cba5ce4f38d8fb5cb58673ba
+  newTag: 0498077ceb558f05fcd9b798c5444cc08afcd921
 - name: FRONTEND_IMAGE
   newName: hremonen/dwkproject-frontend
-  newTag: f8b0bc1cc940b583cba5ce4f38d8fb5cb58673ba
+  newTag: 0498077ceb558f05fcd9b798c5444cc08afcd921
