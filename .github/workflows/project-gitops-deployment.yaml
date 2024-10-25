@@ -3,6 +3,7 @@ name: Build and publish Project to staging
 on:
   push:
     paths:
+      - ".github/workflows/project-gitops-deployment.yaml"
       - "project/**"
 
 jobs:
