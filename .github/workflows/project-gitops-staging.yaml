@@ -1,0 +1,58 @@
+name: Build and publish Project to Staging
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/project-staging-deployment.yaml"
+      - "project/**"
+
+jobs:
+  build-deploy-staging:
+    name: Build, Push, Deploy to Staging
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: project
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build Project Images
+        run: |-
+          docker build --build-arg PRODUCTION=false --tag "hremonen/dwkproject-frontend:$GITHUB_SHA" ./project-frontend
+          docker build --build-arg PRODUCTION=false --tag "hremonen/dwkproject-backend:$GITHUB_SHA" ./project-backend
+          docker build --build-arg PRODUCTION=false --tag "hremonen/dwkproject-cron:$GITHUB_SHA" ./project-cron
+          docker build --build-arg PRODUCTION=false --tag "hremonen/dwkproject-broadcaster:$GITHUB_SHA" ./project-broadcaster
+
+      - name: Push Images to Docker Hub
+        run: |-
+          docker push "hremonen/dwkproject-frontend:$GITHUB_SHA"
+          docker push "hremonen/dwkproject-backend:$GITHUB_SHA"
+          docker push "hremonen/dwkproject-cron:$GITHUB_SHA"
+          docker push "hremonen/dwkproject-broadcaster:$GITHUB_SHA"
+
+      - name: Set up Kustomize
+        uses: imranismail/setup-kustomize@v2
+
+      - name: Generate Kustomization for Staging
+        run: |-
+          kustomize edit set namespace dwk-project-staging
+          kustomize edit set image FRONTEND_IMAGE=hremonen/dwkproject-frontend:$GITHUB_SHA
+          kustomize edit set image BACKEND_IMAGE=hremonen/dwkproject-backend:$GITHUB_SHA
+          kustomize edit set image CRONJOB_IMAGE=hremonen/dwkproject-cron:$GITHUB_SHA
+          kustomize edit set image BROADCASTER_IMAGE=hremonen/dwkproject-broadcaster:$GITHUB_SHA
+
+      - name: Commit kustomization.yaml for Staging
+        uses: EndBug/add-and-commit@v9
+        with:
+          add: "project/kustomization.yaml"
+          message: "Staging deployment - ${{ github.sha }}"
