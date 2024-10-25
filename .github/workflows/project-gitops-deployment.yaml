@@ -9,6 +9,9 @@ jobs:
   build-publish:
     name: Build, Push, Release
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: project
 
     steps:
       - name: Checkout
@@ -27,7 +30,7 @@ jobs:
           docker build --build-arg PRODUCTION=true --tag "hremonen/dwkproject-backend:$GITHUB_SHA" ./project-backend
           docker build --build-arg PRODUCTION=true --tag "hremonen/dwkproject-cron:$GITHUB_SHA" ./project-cron
           docker build --build-arg PRODUCTION=true --tag "hremonen/dwkproject-broadcaster:$GITHUB_SHA" ./project-broadcaster
-      
+
       - name: Push images to Docker Hub
         run: |-
           docker push "hremonen/dwkproject-frontend:$GITHUB_SHA"
@@ -51,5 +54,5 @@ jobs:
       - name: commit kustomization.yaml to GitHub
         uses: EndBug/add-and-commit@v9
         with:
-          add: 'project/kustomization.yaml'
-          message: New staging version released ${{ github.sha }}
+          add: "project/kustomization.yaml"
+          message: New version released ${{ github.sha }}
