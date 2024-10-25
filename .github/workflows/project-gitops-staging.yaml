@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - ".github/workflows/project-staging-deployment.yaml"
+      - ".github/workflows/project-gitops-staging.yaml"
       - "project/**"
 
 jobs:
