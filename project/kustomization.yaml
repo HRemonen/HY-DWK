@@ -18,13 +18,13 @@ resources:
 images:
 - name: BACKEND_IMAGE
   newName: hremonen/dwkproject-backend
-  newTag: 5b2f7affd3ea426088aac0f9f872335030f3588e
+  newTag: 92e452c4ce313ed5c014c8ab6c48101255510299
 - name: BROADCASTER_IMAGE
   newName: hremonen/dwkproject-broadcaster
-  newTag: 5b2f7affd3ea426088aac0f9f872335030f3588e
+  newTag: 92e452c4ce313ed5c014c8ab6c48101255510299
 - name: CRONJOB_IMAGE
   newName: hremonen/dwkproject-cron
-  newTag: 5b2f7affd3ea426088aac0f9f872335030f3588e
+  newTag: 92e452c4ce313ed5c014c8ab6c48101255510299
 - name: FRONTEND_IMAGE
   newName: hremonen/dwkproject-frontend
-  newTag: 5b2f7affd3ea426088aac0f9f872335030f3588e
+  newTag: 92e452c4ce313ed5c014c8ab6c48101255510299
