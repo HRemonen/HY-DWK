@@ -1,5 +1,32 @@
 # Project exercises
 
+## EX 5.02
+
+- Installed Linkerd
+- Meshed the deployments
+    ```bash
+    kubectl get -n dwk-project deploy -o yaml \
+        | linkerd inject - \
+        | kubectl apply -f -
+
+    deployment "dwkproject-broadcaster-dep" injected
+    deployment "dwkproject-dep" injected
+
+    deployment.apps/dwkproject-broadcaster-dep configured
+    deployment.apps/dwkproject-dep configured
+    ```
+- Install Viz dashboard
+    ```bash
+        linkerd viz install | kubectl apply -f -
+
+        linked viz dashboard
+    ```
+- Check that the deployments got [meshed](meshed-deps.png)
+
+## EX 4.08
+
+- Created the manifests for staging and production deployments
+
 ## EX 4.06
 
 - Installed NATS from the Heml charts following the instructions
